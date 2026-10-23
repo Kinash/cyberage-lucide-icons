@@ -4,7 +4,7 @@ Tags: icons, lucide, elementor, svg
 Requires at least: 6.4
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,6 +31,9 @@ Icons: Lucide (https://lucide.dev), ISC licence, see LICENSE-lucide.txt.
 Updates: Plugin Update Checker by Jānis Elsts, MIT licence.
 
 == Changelog ==
+
+= 1.0.1 =
+* Icon picker: the Lucide tab icon now lines up with the Font Awesome tabs.
 
 = 1.0.0 =
 * First release: Lucide 1.58.0 (1,891 icons, 268 old names kept), Elementor icon tab, [lucide] shortcode, GitHub release updates.
