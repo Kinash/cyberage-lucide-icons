@@ -28,7 +28,10 @@ for (const item of INCLUDE) fs.cpSync(path.join(ROOT, item), path.join(stage, it
 fs.rmSync(path.join(stage, "assets", "manifest.json"), { force: true }); // build record, not needed at runtime
 
 const zip = path.join(ROOT, "dist", "cyberage-lucide-icons.zip");
-// Windows 10+ ships bsdtar as tar.exe, which writes standard zip files with forward-slash paths.
-execFileSync("tar", ["-a", "-c", "-f", zip, "cyberage-lucide-icons"], { cwd: path.dirname(stage) });
+// Windows 10+ ships bsdtar as System32\tar.exe, which writes standard zip files with
+// forward-slash paths. Call it by full path: in Git Bash plain "tar" is GNU tar, which reads
+// "D:" as a remote host. The output path is relative to the staging folder for the same reason.
+const tar = process.platform === "win32" ? path.join(process.env.SystemRoot || "C:\\Windows", "System32", "tar.exe") : "tar";
+execFileSync(tar, ["-a", "-c", "-f", path.join("..", "cyberage-lucide-icons.zip"), "cyberage-lucide-icons"], { cwd: path.dirname(stage) });
 fs.rmSync(path.join(ROOT, "dist", "stage"), { recursive: true, force: true });
 console.log(`dist/cyberage-lucide-icons.zip  v${header}  ${(fs.statSync(zip).size / 1024).toFixed(0)} KB`);
