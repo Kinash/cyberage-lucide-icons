@@ -61,20 +61,30 @@ function cyberage_lucide_register_tab( $tabs ) {
  *
  * Inputs: $icon (library + value), $attributes (classes and aria attributes from the widget),
  *         $tag (the fallback tag Elementor would use).
- * Outputs: Inline SVG markup, or Elementor-style <i> markup when the icon is unknown.
+ * Outputs: An inline SVG inside an <i>, or Elementor-style <i> markup when the icon is unknown.
  * Safety: Fallback class and tag are escaped; the tag is limited to i or span.
- * Developer note: 'e-font-icon-svg' is added so Elementor's own icon sizing rules
- *                 (font-size => width/height of the svg) apply to Lucide icons too.
+ * Developer note: Two Elementor conventions meet here (1.0.2).
+ *                 - Colour: Lucide icons are outlines drawn with stroke="currentColor", and the svg
+ *                   keeps style="fill:none" so Elementor's fill colouring cannot fill them in.
+ *                   Several widgets colour an SVG icon only through `fill` and give `color` only to
+ *                   an <i> (Icon List: ".elementor-icon-list-icon i { color }"). Wrapping the svg in
+ *                   an <i> lets every widget's colour control reach the stroke through currentColor.
+ *                 - Size: widgets size an <i> with font-size, so the svg is 1em by 1em and follows it.
+ *                   Widgets that size the svg directly still win (CSS beats the attributes).
+ *                 The Icon List's <i> is 1.25em wide, the same as its svg plus its .25em margin, so
+ *                 the gap before the text does not change.
  */
 function cyberage_lucide_render_icon( $icon, $attributes = array(), $tag = 'i' ) {
 	$value      = isset( $icon['value'] ) ? (string) $icon['value'] : '';
 	$attributes = is_array( $attributes ) ? $attributes : array();
 	$class      = isset( $attributes['class'] ) ? $attributes['class'] : '';
-	$attributes['class'] = trim( 'e-font-icon-svg ' . ( is_array( $class ) ? implode( ' ', $class ) : (string) $class ) );
+	$attributes['class']  = trim( 'e-font-icon-svg ' . ( is_array( $class ) ? implode( ' ', $class ) : (string) $class ) );
+	$attributes['width']  = '1em';
+	$attributes['height'] = '1em';
 
 	$svg = CyberAge_Lucide_Library::svg( $value, $attributes );
 	if ( '' !== $svg ) {
-		return $svg;
+		return '<i class="cyberage-lucide" aria-hidden="true">' . $svg . '</i>';
 	}
 	$tag = in_array( $tag, array( 'i', 'span' ), true ) ? $tag : 'i';
 	return '<' . $tag . ' class="' . esc_attr( $value ) . '" aria-hidden="true"></' . $tag . '>';

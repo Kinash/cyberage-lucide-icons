@@ -4,7 +4,7 @@ Tags: icons, lucide, elementor, svg
 Requires at least: 6.4
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,6 +31,9 @@ Icons: Lucide (https://lucide.dev), ISC licence, see LICENSE-lucide.txt.
 Updates: Plugin Update Checker by Jānis Elsts, MIT licence.
 
 == Changelog ==
+
+= 1.0.2 =
+* Fix: icon colours set in Icon List (and other widgets that colour icons with `color` on an `<i>`) now reach Lucide icons. Each icon is rendered inside an `<i>` and sized 1em, so it follows the widget's icon size and colour.
 
 = 1.0.1 =
 * Icon picker: the Lucide tab icon now lines up with the Font Awesome tabs.

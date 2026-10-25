@@ -3,7 +3,7 @@
  * Plugin Name:       CyberAge Lucide Icons
  * Plugin URI:        https://github.com/Kinash/cyberage-lucide-icons
  * Description:       Adds the Lucide icon set to Elementor's icon picker and a [lucide] shortcode. Icons render as lightweight inline SVG, with no icon font.
- * Version:           1.0.1
+ * Version:           1.0.2
  * Requires at least: 6.4
  * Requires PHP:      7.4
  * Author:            CyberAge Technologies
@@ -37,7 +37,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'CYBERAGE_LUCIDE_VERSION', '1.0.1' );
+define( 'CYBERAGE_LUCIDE_VERSION', '1.0.2' );
 define( 'CYBERAGE_LUCIDE_FILE', __FILE__ );
 define( 'CYBERAGE_LUCIDE_DIR', plugin_dir_path( __FILE__ ) );
 define( 'CYBERAGE_LUCIDE_URL', plugin_dir_url( __FILE__ ) );
